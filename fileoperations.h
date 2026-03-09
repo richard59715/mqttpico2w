@@ -10,6 +10,8 @@ struct Config {
   int    mqttPort=1883;
   String mqttUser="";
   String mqttPass="";
+  int mqttDi=0; //Number of digital in
+  int mqttAi=0; //Number analog in pin 26-28
 };
 
 Config cfg;
@@ -30,6 +32,8 @@ bool loadConfig() {
   cfg.mqttUser = f.readStringUntil('\n'); cfg.mqttUser.trim();
   cfg.mqttPass = f.readStringUntil('\n'); cfg.mqttPass.trim();
 
+  cfg.mqttDi = f.readStringUntil('\n').toInt();
+  cfg.mqttAi = f.readStringUntil('\n').toInt();
   f.close();
   return true;
 }
@@ -43,6 +47,8 @@ void saveConfig() {
   f.println(cfg.mqttPort);
   f.println(cfg.mqttUser);
   f.println(cfg.mqttPass);
+  f.println(cfg.mqttDi);
+  f.println(cfg.mqttAi);
   f.close();
 }
 
@@ -101,6 +107,14 @@ void runSetupWizard() {
 
   Serial.print("Enter MQTT Password: ");
   cfg.mqttPass = readLine();
+
+  Serial.print("Enter Number DI (0-10): ");
+  cfg.mqttDi = readLine().toInt();
+  if (cfg.mqttDi>10 || cfg.mqttDi<0) cfg.mqttDi=0;
+
+  Serial.print("Enter Number AI (0-3): ");
+  cfg.mqttAi = readLine().toInt();
+  if (cfg.mqttAi>3 || cfg.mqttAi<0) cfg.mqttAi=0;
 
   saveConfig();
 

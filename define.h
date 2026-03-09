@@ -1,27 +1,33 @@
 /*
 If host=hpghmqtt1
 
-Publish:
-hpghmqtt1/do0 Pico
-hpghmqtt1/do1 Pico
-hpghmqtt1/do2 Pico
-hpghmqtt1/do3 Pico
-hpghmqtt1/ad1 Pico
-hpghmqtt1/ad2 Pico
-hpghmqtt1/ad3 Pico
+Publish topic:
+hpghmqtt1/di/1 Pico
+hpghmqtt1/di/2 Pico
+hpghmqtt1/di/3 Pico
+hpghmqtt1/di/4 Pico
+:
+hpghmqtt1/di/10 Pico
+
+hpghmqtt1/ad/1 Pico
+hpghmqtt1/ad/2 Pico
+hpghmqtt1/ad/3 Pico
+
 hpghmqtt1/t bme280 or hdc302x
 hpghmqtt1/rh bme280 or hdc302x
 hpghmqtt1/bp bme280
-hpghmqtt1/ad4 ad1015
-hpghmqtt1/ad5 ad1015
-hpghmqtt1/ad6 ad1015
-hpghmqtt1/ad7 ad1015
 
-and subscribe to:
-hpghmqtt1/di1 Pico
-hpghmqtt1/di2 Pico
-hpghmqtt1/di3 Pico
-hpghmqtt1/di4 Pico
+hpghmqtt1/ad/4 ad1015
+hpghmqtt1/ad/5 ad1015
+hpghmqtt1/ad/6 ad1015
+hpghmqtt1/ad/7 ad1015
+
+and for output pins subscribe topic:
+hpghmqtt1/do/1 Pico
+hpghmqtt1/do/2 Pico
+hpghmqtt1/do/3 Pico
+:
+hpghmqtt1/do/12 Pico
 
 Pico pin assignment:
 1 GP0 UART0 TX
@@ -77,58 +83,21 @@ Pico pin assignment:
 #include "LittleFS.h"
 #include "RP2040_PWM.h"
 
-#define UARTTX 0
-#define UARTRX 1
-#define RTS 2
-#define unused 3
-#define SDA 4
-#define SCL 5
-#define D1 6
-#define D2 7
-#define D3 8
-#define D4 9
-#define D5 10
-#define D6 11
-#define D7 12
-#define D8 13
-#define D9 14
-#define D10 15
-#define D11 16
-#define D12 17
-#define D13 18
-#define D14 19
-#define D15 20
-#define D16 21
-#define D17 22
-#define D18 26
-#define D19 27
-#define D20 28
-#define PIN_LEN 4 // Number of GPIO to control 4 input, 4 output
-#define DEBOUNCE 5 //Number of 10 mS debounce counts
+uint8_t inputDi[]={13,14,15,16,17,18,19,20,21,22};
+uint8_t inputAi[]={26,27,28};
+uint8_t outputDo[]={0,1,2,3,5,6,7,8,9,10,11,12};
 
 Adafruit_ADS1015 ads; //Setup A-D converter on I2C
 Adafruit_BME280 bme; //Setup temp, humidity, bararometer on I2C
 Adafruit_HDC302x hdc=Adafruit_HDC302x();
 
-RP2040_PWM* PWM_Instance[PIN_LEN];
 
 LittleFSConfig fscfg;
 
 WiFiClient wifiClient;
 PubSubClient mqtt(wifiClient);
 
-unsigned long lastMQTTReconnect = 0;// Timing
+unsigned long lastMQTTReconnect = 0;
 unsigned long lastWiFiReconnect = 0;
 unsigned long lastInputCheck    = 0;
-unsigned long watchdogActivity;
 bool ledToggle,ad1015,bme280,hdc302x;
-//String ssid,wifiPass,host,mqttServer,mqttPort,mqttUser,mqttPass; //Remember String is a special arduino class
-
-/*
-uint8_t  event_counter_control[PIN_LEN*2]; //Event counter current state and # in new state
-uint32_t
-  freqC[PIN_LEN], //Frequency measurement counter
-  freqT[PIN_LEN], //Timer for freq measure
-  freqL[PIN_LEN]; //Last freq reading
-*/
-
