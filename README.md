@@ -41,11 +41,19 @@ Using the I2C sensors is optional. At startup the system automatically detects w
 At startup you enter the following on the USB port to configure operation:
 
 WiFi ssid:
+
 WiFi password:
+
 Host name: (Ex hpghmqtt1 you can make this any legal host name and this is the first entry in your topic identifier)
+
 mqtt host: address: (Ex. 192.168.1.164)
+
 mqtt port: (Ususally 1883)
+
 mqtt user name: (Leave blank if none)
+
 mqtt password: (Leave blank if none)
+
 Number digital in: (0-10) Set to 0 if you don't want the values of any digital inputs published.
+
 Number analog in: (0-3 Pico pins 26,27,28) Set to 0 if you don't want any pico analog inputs published.
