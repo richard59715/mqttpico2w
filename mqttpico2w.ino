@@ -154,7 +154,7 @@ void setup() {
   ledToggle=0;
 
   Serial.println("");
-  Serial.println("Version 0.004");
+  Serial.println("Version 0.005");
   delay(2000);
   
   fscfg.setAutoFormat(false); //Configure the little file system
