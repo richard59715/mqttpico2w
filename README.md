@@ -5,32 +5,49 @@ If host=hpghmqtt1
 Publish topics:
 
 hpghmqtt1/di/1 (Pico 13)
+
 hpghmqtt1/di/2 (Pico 14)
+
 hpghmqtt1/di/3 (Pico 15)
+
 hpghmqtt1/di/4 (Pico 16)
+
 :
+
 hpghmqtt1/di/10 (Pico 22)
 
+
 hpghmqtt1/ad/1 (Pico 26)
+
 hpghmqtt1/ad/2 (Pico 27)
+
 hpghmqtt1/ad/3 (Pico 28)
 
 hpghmqtt1/t bme280 or hdc302x temperature degrees F
+
 hpghmqtt1/rh bme280 or hdc302x Relative humidity in %
+
 hpghmqtt1/bp bme280 Barometric reading in inches HG
 
 hpghmqtt1/ad/4 ad1015
+
 hpghmqtt1/ad/5 ad1015
+
 hpghmqtt1/ad/6 ad1015
+
 hpghmqtt1/ad/7 ad1015
 
 and for output pins subscribe topic:
 
 hpghmqtt1/do/1 (Pico 0)
+
 hpghmqtt1/do/2 (Pico 1)
+
 hpghmqtt1/do/3 (Pico 2)
+
 :
 hpghmqtt1/do/12 (Pico 12)
+
 (These are on pico IO 0,1,2,3,5,6,7,8,9,10,11,12) 4 and 5 are used for I2C.
 
 Messages (payloads) are 0 for pin low and 1 for pin high.
