@@ -51,8 +51,11 @@ hpghmqtt1/do/12 (Pico 12)
 (These are on pico IO 0,1,2,3,5,6,7,8,9,10,11,12) 4 and 5 are used for I2C.
 
 Messages (payloads) are 0 for pin low and 1 for pin high.
+
 A-D inputs are (0-4095).
+
 Floating point for degrees F, % RH and inches HG for bme280 or hdc302x. You only use bme280 or hdc302x, never both.
+
 Using the I2C sensors is optional. At startup the system automatically detects which sensor modules are attached if any.
 
 At startup you enter the following on the USB port to configure operation:
